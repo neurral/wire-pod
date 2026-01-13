@@ -10,11 +10,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/fforchino/vector-go-sdk/pkg/vector"
-	"github.com/fforchino/vector-go-sdk/pkg/vectorpb"
+	"../../../../third-party/github.com/fforchino/vector-go-sdk/pkg/vector"
+	"../../../../third-party/github.com/fforchino/vector-go-sdk/pkg/vectorpb"
 	"github.com/kercre123/wire-pod/chipper/pkg/logger"
 	"github.com/kercre123/wire-pod/chipper/pkg/vars"
-	"github.com/sashabaranov/go-openai"
+	"../../../../third-party/github.com/sashabaranov/go-openai"
 )
 
 const (

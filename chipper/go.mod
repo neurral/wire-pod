@@ -105,3 +105,17 @@ require (
 	gopkg.in/xmlpath.v2 v2.0.0-20150820204837-860cbeca3ebc // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
+
+replace github.com/asticode/go-asticoqui => ../../../../third-party/github.com/asticode/go-asticoqui
+replace github.com/bramvdbogaerde/go-scp => ../../../../third-party/github.com/bramvdbogaerde/go-scp
+replace github.com/digital-dream-labs/api => ../../../../third-party/github.com/digital-dream-labs/api
+replace github.com/digital-dream-labs/hugh => ../../../../third-party/github.com/digital-dream-labs/hugh
+replace github.com/digital-dream-labs/opus-go => ../../../../third-party/github.com/digital-dream-labs/opus-go
+replace github.com/digital-dream-labs/vector-bluetooth => ../../../../third-party/github.com/digital-dream-labs/vector-bluetooth
+replace github.com/fforchino/vector-go-sdk => ../../../../third-party/github.com/fforchino/vector-go-sdk
+replace github.com/pkg/errors => ../../../../third-party/github.com/pkg/errors
+replace github.com/sashabaranov/go-openai => ../../../../third-party/github.com/sashabaranov/go-openai
+replace github.com/soundhound/houndify-sdk-go => ../../../../third-party/github.com/soundhound/houndify-sdk-go
+replace github.com/vadv/gopher-lua-libs => ../../../../third-party/github.com/vadv/gopher-lua-libs
+replace github.com/wlynxg/anet => ../../../../third-party/github.com/wlynxg/anet
+replace github.com/yuin/gopher-lua => ../../../../third-party/github.com/yuin/gopher-lua

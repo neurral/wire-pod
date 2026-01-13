@@ -5,14 +5,14 @@ import (
 	"strings"
 	"regexp"
 
-	pb "github.com/digital-dream-labs/api/go/chipperpb"
+	pb "../../../../third-party/github.com/digital-dream-labs/api/go/chipperpb"
 	"github.com/kercre123/wire-pod/chipper/pkg/logger"
 	"github.com/kercre123/wire-pod/chipper/pkg/vars"
 	"github.com/kercre123/wire-pod/chipper/pkg/vtt"
 	sr "github.com/kercre123/wire-pod/chipper/pkg/wirepod/speechrequest"
 	ttr "github.com/kercre123/wire-pod/chipper/pkg/wirepod/ttr"
-	"github.com/pkg/errors"
-	"github.com/soundhound/houndify-sdk-go"
+	"../../../../third-party/github.com/pkg/errors"
+	"../../../../third-party/github.com/soundhound/houndify-sdk-go"
 )
 
 var HKGclient houndify.Client

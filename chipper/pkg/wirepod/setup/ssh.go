@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	scp "github.com/bramvdbogaerde/go-scp"
+	scp "../../../../third-party/github.com/bramvdbogaerde/go-scp"
 	"github.com/kercre123/wire-pod/chipper/pkg/logger"
 	"github.com/kercre123/wire-pod/chipper/pkg/vars"
 	"golang.org/x/crypto/ssh"
