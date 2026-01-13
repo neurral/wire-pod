@@ -12,9 +12,9 @@ import (
 
 	"../../../../third-party/github.com/fforchino/vector-go-sdk/pkg/vector"
 	"../../../../third-party/github.com/fforchino/vector-go-sdk/pkg/vectorpb"
+	"../../../../third-party/github.com/sashabaranov/go-openai"
 	"github.com/kercre123/wire-pod/chipper/pkg/logger"
 	"github.com/kercre123/wire-pod/chipper/pkg/vars"
-	"../../../../third-party/github.com/sashabaranov/go-openai"
 )
 
 const (

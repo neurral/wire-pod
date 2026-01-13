@@ -15,9 +15,9 @@ require (
 	github.com/go-audio/wav v1.1.0
 	github.com/golang-jwt/jwt v3.2.2+incompatible
 	github.com/google/uuid v1.5.0
-	github.com/kercre123/vosk-api/go v1.0.2
-	github.com/kercre123/whisper.cpp/bindings/go v0.0.0-20250602164512-60cd96acff3a
-	github.com/kercre123/zeroconf v1.0.1
+	github.com/alphacep/vosk-api/go v0.3.50
+	github.com/ggerganov/whisper.cpp/bindings/go v0.0.0-20250602164512-60cd96acff3a
+	github.com/grandcat/zeroconf v1.0.1
 	github.com/maxhawkins/go-webrtcvad v0.0.0-20210121163624-be60036f3083
 	github.com/ncruces/zenity v0.10.10
 	github.com/orcaman/writerseeker v0.0.0-20200621085525-1d3f536ff85e
@@ -106,16 +106,19 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
 
-replace github.com/asticode/go-asticoqui => ../../../../third-party/github.com/asticode/go-asticoqui
-replace github.com/bramvdbogaerde/go-scp => ../../../../third-party/github.com/bramvdbogaerde/go-scp
-replace github.com/digital-dream-labs/api => ../../../../third-party/github.com/digital-dream-labs/api
-replace github.com/digital-dream-labs/hugh => ../../../../third-party/github.com/digital-dream-labs/hugh
-replace github.com/digital-dream-labs/opus-go => ../../../../third-party/github.com/digital-dream-labs/opus-go
-replace github.com/digital-dream-labs/vector-bluetooth => ../../../../third-party/github.com/digital-dream-labs/vector-bluetooth
-replace github.com/fforchino/vector-go-sdk => ../../../../third-party/github.com/fforchino/vector-go-sdk
-replace github.com/pkg/errors => ../../../../third-party/github.com/pkg/errors
-replace github.com/sashabaranov/go-openai => ../../../../third-party/github.com/sashabaranov/go-openai
-replace github.com/soundhound/houndify-sdk-go => ../../../../third-party/github.com/soundhound/houndify-sdk-go
-replace github.com/vadv/gopher-lua-libs => ../../../../third-party/github.com/vadv/gopher-lua-libs
-replace github.com/wlynxg/anet => ../../../../third-party/github.com/wlynxg/anet
-replace github.com/yuin/gopher-lua => ../../../../third-party/github.com/yuin/gopher-lua
+replace github.com/asticode/go-asticoqui => ../../../third-party/github.com/asticode/go-asticoqui
+replace github.com/bramvdbogaerde/go-scp => ../../../third-party/github.com/bramvdbogaerde/go-scp
+replace github.com/digital-dream-labs/api => ../../../third-party/github.com/digital-dream-labs/api
+replace github.com/digital-dream-labs/hugh => ../../../third-party/github.com/digital-dream-labs/hugh
+replace github.com/digital-dream-labs/opus-go => ../../../third-party/github.com/digital-dream-labs/opus-go
+replace github.com/digital-dream-labs/vector-bluetooth => ../../../third-party/github.com/digital-dream-labs/vector-bluetooth
+replace github.com/fforchino/vector-go-sdk => ../../../third-party/github.com/fforchino/vector-go-sdk
+replace github.com/pkg/errors => ../../../third-party/github.com/pkg/errors
+replace github.com/sashabaranov/go-openai => ../../../third-party/github.com/sashabaranov/go-openai
+replace github.com/soundhound/houndify-sdk-go => ../../../third-party/github.com/soundhound/houndify-sdk-go
+replace github.com/vadv/gopher-lua-libs => ../../../third-party/github.com/vadv/gopher-lua-libs
+replace github.com/wlynxg/anet => ../../../third-party/github.com/wlynxg/anet
+replace github.com/yuin/gopher-lua => ../../../third-party/github.com/yuin/gopher-lua
+replace github.com/alphacep/vosk-api/go => ../../../third-party/github.com/alphacep/vosk-api/go
+replace github.com/ggerganov/whisper.cpp/bindings/go => ../../../third-party/github.com/ggerganov/whisper.cpp/bindings/go
+replace github.com/grandcat/zeroconf => ../../../third-party/github.com/grandcat/zeroconf

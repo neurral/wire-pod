@@ -14,10 +14,10 @@ import (
 
 	"../../../../third-party/github.com/fforchino/vector-go-sdk/pkg/vector"
 	"../../../../third-party/github.com/fforchino/vector-go-sdk/pkg/vectorpb"
-	"github.com/kercre123/wire-pod/chipper/pkg/logger"
-	"github.com/kercre123/wire-pod/chipper/pkg/vars"
 	lualibs "../../../../third-party/github.com/vadv/gopher-lua-libs"
 	lua "../../../../third-party/github.com/yuin/gopher-lua"
+	"github.com/kercre123/wire-pod/chipper/pkg/logger"
+	"github.com/kercre123/wire-pod/chipper/pkg/vars"
 )
 
 /*
