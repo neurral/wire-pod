@@ -14,9 +14,9 @@ import (
 	"golang.org/x/text/transform"
 	"golang.org/x/text/unicode/norm"
 
-	"../../../../third-party/github.com/fforchino/vector-go-sdk/pkg/vector"
-	"../../../../third-party/github.com/fforchino/vector-go-sdk/pkg/vectorpb"
-	"../../../../third-party/github.com/sashabaranov/go-openai"
+	"github.com/fforchino/vector-go-sdk/pkg/vector"
+	"github.com/fforchino/vector-go-sdk/pkg/vectorpb"
+	"github.com/sashabaranov/go-openai"
 	"github.com/kercre123/wire-pod/chipper/pkg/logger"
 	"github.com/kercre123/wire-pod/chipper/pkg/vars"
 )
@@ -251,6 +251,14 @@ func StreamingKGSim(req interface{}, esn string, transcribedText string, isKG bo
 	case "custom":
 		conf := openai.DefaultConfig(vars.APIConfig.Knowledge.Key)
 		conf.BaseURL = vars.APIConfig.Knowledge.Endpoint
+		c = openai.NewClientWithConfig(conf)
+	case "lmstudio":
+		conf := openai.DefaultConfig(vars.APIConfig.Knowledge.Key)
+		if vars.APIConfig.Knowledge.Endpoint == "" {
+			conf.BaseURL = "http://localhost:1234/v1"
+		} else {
+			conf.BaseURL = vars.APIConfig.Knowledge.Endpoint
+		}
 		c = openai.NewClientWithConfig(conf)
 	case "openai":
 		c = openai.NewClient(vars.APIConfig.Knowledge.Key)

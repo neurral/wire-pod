@@ -85,6 +85,7 @@
               <option value="houndify">Houndify</option>
               <option value="together">Together</option>
               <option value="custom">Custom</option>
+              <option value="lmstudio">LM Studio</option>
             </select>
             <span id="houndifyInput" style="display: none">
               <small class="desc">To use Houndify, create an account at
@@ -151,6 +152,19 @@
                   Vector. Keep the response concise yet
                   informative.")</label></small>
               <input type="text" name="customAIPrompt" id="customAIPrompt" /><br />
+            </span>
+
+            <span id="lmstudioInput" style="display: none">
+              <small class="desc">For LM Studio, ensure the Local Server is started. Default endpoint is http://localhost:1234/v1</small><br />
+              <label for="lmstudioKey">API Key <small class="desc">(can be left blank)</small>:</label>
+              <input type="text" name="lmstudioKey" id="lmstudioKey" /><br />
+              <label for="lmstudioEndpoint">LM Studio Endpoint:</label>
+              <input type="text" name="lmstudioEndpoint" id="lmstudioEndpoint" placeholder="http://localhost:1234/v1" /><br />
+              <label for="lmstudioModel">Model Name <small class="desc">(optional; matches the model loaded in LM Studio)</small>:</label>
+              <input type="text" name="lmstudioModel" id="lmstudioModel" /><br />
+              <label for="lmstudioAIPrompt">LLM Prompt <small class="desc">(leave blank for default)</small>:</label><br />
+              <small><label class="desc" for="lmstudioAIPrompt">(default: "You are a helpful, animated robot called Vector. Keep the response concise yet informative.")</label></small>
+              <input type="text" name="lmstudioAIPrompt" id="lmstudioAIPrompt" /><br />
             </span>
 
             <div style="text-align: left;">

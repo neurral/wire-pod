@@ -248,6 +248,7 @@ function checkKG() {
     "houndifyInput",
     "togetherInput",
     "customAIInput",
+    "lmstudioInput",
     "intentGraphInput",
     "openAIInput",
     "saveChatInput",
@@ -275,6 +276,11 @@ function checkKG() {
     } else if (provider === "custom") {
       getE("intentGraphInput").style.display = "block";
       getE("customAIInput").style.display = "block";
+      getE("saveChatInput").style.display = "block";
+      getE("llmCommandInput").style.display = "block";
+    } else if (provider === "lmstudio") {
+      getE("intentGraphInput").style.display = "block";
+      getE("lmstudioInput").style.display = "block";
       getE("saveChatInput").style.display = "block";
       getE("llmCommandInput").style.display = "block";
     }
@@ -314,6 +320,14 @@ function sendKGAPIKey() {
     data.intentgraph = getE("intentyes").checked
     data.save_chat = getE("saveChatYes").checked
     data.commands_enable = getE("commandYes").checked
+  } else if (provider === "lmstudio") {
+    data.key = getE("lmstudioKey").value;
+    data.model = getE("lmstudioModel").value;
+    data.openai_prompt = getE("lmstudioAIPrompt").value;
+    data.endpoint = getE("lmstudioEndpoint").value || "http://localhost:1234/v1";
+    data.intentgraph = getE("intentyes").checked;
+    data.save_chat = getE("saveChatYes").checked;
+    data.commands_enable = getE("commandYes").checked;
   } else if (provider === "together") {
     data.key = getE("togetherKey").value;
     data.model = getE("togetherModel").value;
@@ -381,6 +395,14 @@ function updateKGAPI() {
         getE("commandYes").checked = data.commands_enable
         getE("intentyes").checked = data.intentgraph
         getE("saveChatYes").checked = data.save_chat
+      } else if (data.provider === "lmstudio") {
+        getE("lmstudioKey").value = data.key;
+        getE("lmstudioModel").value = data.model;
+        getE("lmstudioAIPrompt").value = data.openai_prompt;
+        getE("lmstudioEndpoint").value = data.endpoint;
+        getE("commandYes").checked = data.commands_enable;
+        getE("intentyes").checked = data.intentgraph;
+        getE("saveChatYes").checked = data.save_chat;
       } else if (data.provider === "houndify") {
         getE("houndKey").value = data.key;
         getE("houndID").value = data.id;

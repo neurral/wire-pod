@@ -12,10 +12,10 @@ import (
 	"os"
 	"time"
 
-	"../../../../third-party/github.com/fforchino/vector-go-sdk/pkg/vector"
-	"../../../../third-party/github.com/fforchino/vector-go-sdk/pkg/vectorpb"
-	lualibs "../../../../third-party/github.com/vadv/gopher-lua-libs"
-	lua "../../../../third-party/github.com/yuin/gopher-lua"
+	"github.com/fforchino/vector-go-sdk/pkg/vector"
+	"github.com/fforchino/vector-go-sdk/pkg/vectorpb"
+	lualibs "github.com/vadv/gopher-lua-libs"
+	lua "github.com/yuin/gopher-lua"
 	"github.com/kercre123/wire-pod/chipper/pkg/logger"
 	"github.com/kercre123/wire-pod/chipper/pkg/vars"
 )
