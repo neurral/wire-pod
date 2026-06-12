@@ -216,6 +216,66 @@ func StreamingKGSim(req interface{}, esn string, transcribedText string, isKG bo
 	if err != nil {
 		return "", err
 	}
+	if strings.TrimSpace(transcribedText) == "" {
+		if isKG && robot != nil {
+			BControl(robot, ctx, start, stop)
+			go func() {
+				for range start {
+					robot.Conn.PlayAnimation(
+						ctx,
+						&vectorpb.PlayAnimationRequest{
+							Animation: &vectorpb.Animation{
+								Name: "anim_knowledgegraph_fail_01",
+							},
+							Loops: 1,
+						},
+					)
+					time.Sleep(time.Millisecond * 300)
+
+					errMsg := "I didn't catch that."
+					switch vars.APIConfig.STT.Language {
+					case "it-IT":
+						errMsg = "Non ho capito."
+					case "es-ES":
+						errMsg = "No he entendido bien."
+					case "fr-FR":
+						errMsg = "Je n'ai pas compris."
+					case "de-DE":
+						errMsg = "Ich habe das nicht verstanden."
+					case "pt-BR":
+						errMsg = "Não entendi."
+					case "pl-PL":
+						errMsg = "Nie zrozumiałem."
+					case "zh-CN":
+						errMsg = "我没有听懂。"
+					case "tr-TR":
+						errMsg = "Ne dediğini anlamadım."
+					case "ru-RU":
+						errMsg = "Я не расслышал."
+					case "nt-NL":
+						errMsg = "Ik heb het niet begrepen."
+					case "uk-UA":
+						errMsg = "Я не зрозумів."
+					case "vi-VN":
+						errMsg = "Tôi không nghe rõ."
+					case "ko-KR":
+						errMsg = "잘 알아듣지 못했어요."
+					}
+
+					robot.Conn.SayText(
+						ctx,
+						&vectorpb.SayTextRequest{
+							Text:           errMsg,
+							UseVectorVoice: true,
+							DurationScalar: 1.0,
+						},
+					)
+					stop <- true
+				}
+			}()
+		}
+		return "", errors.New("transcribed text is empty")
+	}
 	if isKG {
 		BControl(robot, ctx, start, stop)
 		go func() {

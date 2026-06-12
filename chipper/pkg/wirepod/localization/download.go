@@ -32,41 +32,46 @@ var URLPrefix string = "https://github.com/kercre123/vosk-models/raw/main/"
 var DownloadStatus string = "not downloading"
 
 func DownloadVoskModel(language string) {
-	filename := "vosk-model-small-"
+	var filename string
+	var url string
 	if language == "en-US" {
-		filename = filename + "en-us-0.15.zip"
-	} else if language == "it-IT" {
-		filename = filename + "it-0.22.zip"
-	} else if language == "es-ES" {
-		filename = filename + "es-0.42.zip"
-	} else if language == "fr-FR" {
-		filename = filename + "fr-0.22.zip"
-	} else if language == "de-DE" {
-		filename = filename + "de-0.15.zip"
-	} else if language == "pt-BR" {
-		filename = filename + "pt-0.3.zip"
-	} else if language == "pl-PL" {
-		filename = filename + "pl-0.22.zip"
-	} else if language == "zh-CN" {
-		filename = filename + "cn-0.22.zip"
-	} else if language == "tr-TR" {
-		filename = filename + "tr-0.3.zip"
-	} else if language == "ru-RU" {
-		filename = filename + "ru-0.22.zip"
-	} else if language == "nt-NL" {
-		filename = filename + "nl-0.22.zip"
-	} else if language == "uk-UA" {
-		filename = filename + "uk-v3-small.zip"
-	} else if language == "vi-VN" {
-		filename = filename + "vn-0.4.zip"
-	} else if language == "ko-KR" {
-		filename = filename + "ko-0.22.zip"
+		filename = "vosk-model-en-us-0.22-lgraph.zip"
+		url = "https://alphacephei.com/vosk/models/" + filename
 	} else {
-		logger.Println("Language not valid? " + language)
-		return
+		filename = "vosk-model-small-"
+		if language == "it-IT" {
+			filename = filename + "it-0.22.zip"
+		} else if language == "es-ES" {
+			filename = filename + "es-0.42.zip"
+		} else if language == "fr-FR" {
+			filename = filename + "fr-0.22.zip"
+		} else if language == "de-DE" {
+			filename = filename + "de-0.15.zip"
+		} else if language == "pt-BR" {
+			filename = filename + "pt-0.3.zip"
+		} else if language == "pl-PL" {
+			filename = filename + "pl-0.22.zip"
+		} else if language == "zh-CN" {
+			filename = filename + "cn-0.22.zip"
+		} else if language == "tr-TR" {
+			filename = filename + "tr-0.3.zip"
+		} else if language == "ru-RU" {
+			filename = filename + "ru-0.22.zip"
+		} else if language == "nt-NL" {
+			filename = filename + "nl-0.22.zip"
+		} else if language == "uk-UA" {
+			filename = filename + "uk-v3-small.zip"
+		} else if language == "vi-VN" {
+			filename = filename + "vn-0.4.zip"
+		} else if language == "ko-KR" {
+			filename = filename + "ko-0.22.zip"
+		} else {
+			logger.Println("Language not valid? " + language)
+			return
+		}
+		url = URLPrefix + filename
 	}
 	os.MkdirAll(vars.VoskModelPath, 0755)
-	url := URLPrefix + filename
 	var filep string
 	if runtime.GOOS == "android" || runtime.GOOS == "ios" {
 		filep = filepath.Join(vars.AndroidPath, "/"+filename)

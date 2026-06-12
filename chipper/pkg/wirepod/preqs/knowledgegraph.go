@@ -73,6 +73,11 @@ func streamingKG(req *vtt.KnowledgeGraphRequest, speechReq sr.SpeechRequest) str
 	if err != nil {
 		return "There was an error."
 	}
+	if strings.TrimSpace(transcribedText) == "" {
+		logger.Println("Transcribed text is empty, bypassing LLM stream and playing fail animation")
+		_, err = ttr.StreamingKGSim(req, req.Device, transcribedText, true)
+		return ""
+	}
 	kg := pb.KnowledgeGraphResponse{
 		Session:     req.Session,
 		DeviceId:    req.Device,

@@ -7,14 +7,15 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"regexp"
 	"strings"
 	"time"
 
 	"github.com/fforchino/vector-go-sdk/pkg/vector"
 	"github.com/fforchino/vector-go-sdk/pkg/vectorpb"
-	"github.com/sashabaranov/go-openai"
 	"github.com/kercre123/wire-pod/chipper/pkg/logger"
 	"github.com/kercre123/wire-pod/chipper/pkg/vars"
+	"github.com/sashabaranov/go-openai"
 )
 
 const (
@@ -159,6 +160,7 @@ func CreatePrompt(origPrompt string, model string, isKG bool) string {
 				prompt = prompt + promptAppendage
 			}
 		}
+		prompt = prompt + "\n\n" + "CRITICAL: You MUST only use the exact parameter choices listed above. Do not invent new parameters or synonyms. Do not format parameters as key=value."
 		if isKG && vars.APIConfig.Knowledge.SaveChat {
 			promptAppentage := "\n\nNOTE: You are in 'conversation' mode. If you ask the user a question near the end of your response, you MUST use newVoiceRequest. If you decide you want to end the conversation, you should not use it."
 			prompt = prompt + promptAppentage
@@ -173,8 +175,50 @@ func CreatePrompt(origPrompt string, model string, isKG bool) string {
 	return prompt
 }
 
+func IsValidAnimationName(name string) bool {
+	switch name {
+	case "veryHappy", "happy", "sad", "verySad", "confused", "thinking", "angry", "frustrated", "celebrate", "love", "dartingEyes":
+		return true
+	}
+	return false
+}
+
 func GetActionsFromString(input string) []RobotAction {
-	splitInput := strings.Split(input, "{{")
+	// Auto-repair bare brace-wrapped animations/synonyms (e.g. {{happy}} -> {{playAnimationWI||happy}})
+	braceRe := regexp.MustCompile(`\{{1,2}([^{}]+)\}{1,2}`)
+	input = braceRe.ReplaceAllStringFunc(input, func(m string) string {
+		inner := m
+		for len(inner) > 0 && inner[0] == '{' {
+			inner = inner[1:]
+		}
+		for len(inner) > 0 && inner[len(inner)-1] == '}' {
+			inner = inner[:len(inner)-1]
+		}
+		inner = strings.TrimSpace(inner)
+		if strings.Contains(inner, "|") {
+			return m
+		}
+		switch inner {
+		case "playAnimationWI", "playAnimation", "getImage", "newVoiceRequest":
+			return m
+		}
+		norm := NormalizeAnimationName(inner)
+		if IsValidAnimationName(norm) {
+			return "{{playAnimationWI||" + norm + "}}"
+		}
+		return m
+	})
+
+	// Clean and standardise command wrapping
+	// Remove all existing braces
+	cleanedInput := strings.ReplaceAll(input, "{{", "")
+	cleanedInput = strings.ReplaceAll(cleanedInput, "}}", "")
+
+	// Regex to find commands with optional delimiter and parameter
+	re := regexp.MustCompile(`\b(playAnimationWI|playAnimation|getImage|newVoiceRequest)(?:(\|\||\|)([a-zA-Z0-9_=\-]+))?`)
+	cleanedInput = re.ReplaceAllString(cleanedInput, "{{$1||$3}}")
+
+	splitInput := strings.Split(cleanedInput, "{{")
 	if len(splitInput) == 1 {
 		return []RobotAction{
 			{
@@ -199,8 +243,14 @@ func GetActionsFromString(input string) []RobotAction {
 		}
 
 		cmdPlusParam := strings.Split(strings.TrimSpace(strings.Split(spl, "}}")[0]), "||")
+		if len(cmdPlusParam) == 1 {
+			cmdPlusParam = strings.Split(strings.TrimSpace(strings.Split(spl, "}}")[0]), "|")
+		}
 		cmd := strings.TrimSpace(cmdPlusParam[0])
-		param := strings.TrimSpace(cmdPlusParam[1])
+		param := ""
+		if len(cmdPlusParam) > 1 {
+			param = strings.TrimSpace(cmdPlusParam[1])
+		}
 		action := CmdParamToAction(cmd, param)
 		if action.Action != -1 {
 			actions = append(actions, action)
@@ -216,9 +266,45 @@ func GetActionsFromString(input string) []RobotAction {
 	return actions
 }
 
+func NormalizeAnimationName(animation string) string {
+	anim := strings.ToLower(strings.TrimSpace(animation))
+	if strings.Contains(anim, "=") {
+		parts := strings.Split(anim, "=")
+		anim = strings.TrimSpace(parts[len(parts)-1])
+	}
+	switch anim {
+	case "excited", "enthusiasm", "enthusiastic", "joy", "joyful", "veryhappy", "very_happy":
+		return "veryHappy"
+	case "happy", "glad", "cheerful":
+		return "happy"
+	case "sad", "unhappy", "sorrowful", "sorry", "concern", "concerned", "worried", "worry":
+		return "sad"
+	case "verysad", "very_sad", "crying", "grief":
+		return "verySad"
+	case "confused", "confusion", "curious", "curiosity", "puzzled":
+		return "confused"
+	case "thinking", "thoughtful", "wondering", "pondering":
+		return "thinking"
+	case "angry", "mad", "furious", "annoyed":
+		return "angry"
+	case "frustrated", "frustration":
+		return "frustrated"
+	case "celebrate", "celebrating", "excitedly", "victory":
+		return "celebrate"
+	case "love", "loving", "affectionate", "affection":
+		return "love"
+	case "dartingeyes", "darting_eyes", "looking":
+		return "dartingEyes"
+	}
+	return animation
+}
+
 func CmdParamToAction(cmd, param string) RobotAction {
 	for _, command := range ValidLLMCommands {
 		if cmd == command.Command {
+			if cmd == "playAnimation" || cmd == "playAnimationWI" {
+				param = NormalizeAnimationName(param)
+			}
 			return RobotAction{
 				Action:    command.Action,
 				Parameter: param,
