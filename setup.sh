@@ -199,13 +199,13 @@ function getSTT() {
             cd ${ROOT}/.vosk
             # Copy from local third-party repository instead of downloading
             if [[ ${TARGET} == "darwin" ]]; then
-                cp -r ${origDir}/third-party/github.com/alphacep/vosk-api/lib/vosk-osx-0.3.42 libvosk
+                cp -r ${origDir}/../third-party/github.com/alphacep/vosk-api/lib/vosk-osx-0.3.42 libvosk
             elif [[ ${ARCH} == "x86_64" ]]; then
-                cp -r ${origDir}/third-party/github.com/alphacep/vosk-api/lib/vosk-linux-x86_64-0.3.45 libvosk
+                cp -r ${origDir}/../third-party/github.com/alphacep/vosk-api/lib/vosk-linux-x86_64-0.3.45 libvosk
             elif [[ ${ARCH} == "aarch64" ]]; then
-                cp -r ${origDir}/third-party/github.com/alphacep/vosk-api/lib/vosk-linux-aarch64-0.3.45 libvosk
+                cp -r ${origDir}/../third-party/github.com/alphacep/vosk-api/lib/vosk-linux-aarch64-0.3.45 libvosk
             elif [[ ${ARCH} == "armv7l" ]]; then
-                cp -r ${origDir}/third-party/github.com/alphacep/vosk-api/lib/vosk-linux-armv7l-0.3.45 libvosk
+                cp -r ${origDir}/../third-party/github.com/alphacep/vosk-api/lib/vosk-linux-armv7l-0.3.45 libvosk
             fi
             
             cd ${origDir}/chipper
@@ -224,7 +224,7 @@ function getSTT() {
         echo "Getting Whisper assets"
         if [[ ! -d ./whisper.cpp ]]; then
             echo "Copying Whisper.cpp from local repository"
-            cp -r ${origDir}/third-party/github.com/ggerganov/whisper.cpp ./whisper.cpp
+            cp -r ${origDir}/../third-party/github.com/ggerganov/whisper.cpp ./whisper.cpp
             cd whisper.cpp
         else
             cd whisper.cpp
@@ -272,22 +272,22 @@ function getSTT() {
             if [[ ${ARCH} == "x86_64" ]]; then
                 if [[ ${AVXSUPPORT} == "noavx" ]]; then
                     echo "Warning: noavx Coqui binaries not available locally, you may need to build from source"
-                    # cp ${origDir}/third-party/github.com/coqui-ai/STT/native_client.tflite.Linux.tar.xz .
+                    # cp ${origDir}/../third-party/github.com/coqui-ai/STT/native_client.tflite.Linux.tar.xz .
                     # tar -xf native_client.tflite.Linux.tar.xz
                 else
                     echo "Copying x86_64 Coqui binaries"
-                    # cp ${origDir}/third-party/github.com/coqui-ai/STT/native_client.tflite.Linux.tar.xz .
+                    # cp ${origDir}/../third-party/github.com/coqui-ai/STT/native_client.tflite.Linux.tar.xz .
                     # tar -xf native_client.tflite.Linux.tar.xz
                     echo "TODO: Provide local Coqui binaries or build from source"
                 fi
                 elif [[ ${ARCH} == "aarch64" ]]; then
                 echo "Copying aarch64 Coqui binaries"
-                # cp ${origDir}/third-party/github.com/coqui-ai/STT/native_client.tflite.linux.aarch64.tar.xz .
+                # cp ${origDir}/../third-party/github.com/coqui-ai/STT/native_client.tflite.linux.aarch64.tar.xz .
                 # tar -xf native_client.tflite.linux.aarch64.tar.xz
                 echo "TODO: Provide local Coqui binaries or build from source"
                 elif [[ ${ARCH} == "armv7l" ]]; then
                 echo "Copying armv7 Coqui binaries"
-                # cp ${origDir}/third-party/github.com/coqui-ai/STT/native_client.tflite.linux.armv7.tar.xz .
+                # cp ${origDir}/../third-party/github.com/coqui-ai/STT/native_client.tflite.linux.armv7.tar.xz .
                 # tar -xf native_client.tflite.linux.armv7.tar.xz
                 echo "TODO: Provide local Coqui binaries or build from source"
             fi
