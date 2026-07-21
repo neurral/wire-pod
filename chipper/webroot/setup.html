@@ -84,6 +84,8 @@
               <option value="openai">OpenAI</option>
               <option value="houndify">Houndify</option>
               <option value="together">Together</option>
+              <option value="openrouter">OpenRouter</option>
+              <option value="grok">Grok (xAI)</option>
               <option value="custom">Custom</option>
               <option value="lmstudio">LM Studio</option>
             </select>
@@ -134,6 +136,29 @@
                 <option value="nova">Nova</option>
                 <option value="shimmer">Shimmer</option>
               </select>
+            </span>
+
+
+            <span id="openrouterInput" style="display: none">
+              <small class="desc">To use OpenRouter, create an API key at <a target="_blank" href="https://openrouter.ai">openrouter.ai</a>. Free models are supported via the 'openrouter/free' router.</small><br />
+              <label for="openrouterKey">OpenRouter API Key:</label>
+              <input type="text" name="openrouterKey" id="openrouterKey" /><br />
+              <label for="openrouterModel">Model ID <small class="desc">(default: openrouter/free):</small></label>
+              <input type="text" name="openrouterModel" id="openrouterModel" placeholder="openrouter/free" /><br />
+              <label for="openrouterAIPrompt">LLM Prompt <small class="desc">(leave blank for default):</small></label><br />
+              <small><label class="desc" for="openrouterAIPrompt">(default: "You are a helpful, animated robot called Vector. Keep the response concise yet informative.")</label></small>
+              <input type="text" name="openrouterAIPrompt" id="openrouterAIPrompt" /><br />
+            </span>
+
+            <span id="grokInput" style="display: none">
+              <small class="desc">To use Grok, create an API key at <a target="_blank" href="https://console.x.ai">console.x.ai</a>.</small><br />
+              <label for="grokKey">Grok API Key:</label>
+              <input type="text" name="grokKey" id="grokKey" /><br />
+              <label for="grokModel">Model ID <small class="desc">(default: grok-3-mini):</small></label>
+              <input type="text" name="grokModel" id="grokModel" placeholder="grok-3-mini" /><br />
+              <label for="grokAIPrompt">LLM Prompt <small class="desc">(leave blank for default):</small></label><br />
+              <small><label class="desc" for="grokAIPrompt">(default: "You are a helpful, animated robot called Vector. Keep the response concise yet informative.")</label></small>
+              <input type="text" name="grokAIPrompt" id="grokAIPrompt" /><br />
             </span>
 
             <span id="customAIInput" style="display: none">

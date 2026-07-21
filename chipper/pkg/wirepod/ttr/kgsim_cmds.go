@@ -561,6 +561,22 @@ func DoGetImage(msgs []openai.ChatCompletionMessage, param string, robot *vector
 		conf := openai.DefaultConfig(vars.APIConfig.Knowledge.Key)
 		conf.BaseURL = "https://api.together.xyz/v1"
 		c = openai.NewClientWithConfig(conf)
+	case "openrouter":
+		if vars.APIConfig.Knowledge.Model == "" {
+			vars.APIConfig.Knowledge.Model = "openrouter/free"
+			vars.WriteConfigToDisk()
+		}
+		conf := openai.DefaultConfig(vars.APIConfig.Knowledge.Key)
+		conf.BaseURL = "https://openrouter.ai/api/v1"
+		c = openai.NewClientWithConfig(conf)
+	case "grok":
+		if vars.APIConfig.Knowledge.Model == "" {
+			vars.APIConfig.Knowledge.Model = "grok-3-mini"
+			vars.WriteConfigToDisk()
+		}
+		conf := openai.DefaultConfig(vars.APIConfig.Knowledge.Key)
+		conf.BaseURL = "https://api.x.ai/v1"
+		c = openai.NewClientWithConfig(conf)
 	case "openai":
 		c = openai.NewClient(vars.APIConfig.Knowledge.Key)
 	case "custom":

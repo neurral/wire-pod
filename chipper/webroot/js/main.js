@@ -247,6 +247,8 @@ function checkKG() {
   const elements = [
     "houndifyInput",
     "togetherInput",
+    "openrouterInput",
+    "grokInput",
     "customAIInput",
     "lmstudioInput",
     "intentGraphInput",
@@ -271,6 +273,16 @@ function checkKG() {
     } else if (provider === "together") {
       getE("intentGraphInput").style.display = "block";
       getE("togetherInput").style.display = "block";
+      getE("saveChatInput").style.display = "block";
+      getE("llmCommandInput").style.display = "block";
+    } else if (provider === "openrouter") {
+      getE("intentGraphInput").style.display = "block";
+      getE("openrouterInput").style.display = "block";
+      getE("saveChatInput").style.display = "block";
+      getE("llmCommandInput").style.display = "block";
+    } else if (provider === "grok") {
+      getE("intentGraphInput").style.display = "block";
+      getE("grokInput").style.display = "block";
       getE("saveChatInput").style.display = "block";
       getE("llmCommandInput").style.display = "block";
     } else if (provider === "custom") {
@@ -335,6 +347,20 @@ function sendKGAPIKey() {
     data.intentgraph = getE("intentyes").checked;
     data.save_chat = getE("saveChatYes").checked
     data.commands_enable = getE("commandYes").checked
+  } else if (provider === "openrouter") {
+    data.key = getE("openrouterKey").value;
+    data.model = getE("openrouterModel").value || "openrouter/free";
+    data.openai_prompt = getE("openrouterAIPrompt").value;
+    data.intentgraph = getE("intentyes").checked;
+    data.save_chat = getE("saveChatYes").checked;
+    data.commands_enable = getE("commandYes").checked;
+  } else if (provider === "grok") {
+    data.key = getE("grokKey").value;
+    data.model = getE("grokModel").value || "grok-3-mini";
+    data.openai_prompt = getE("grokAIPrompt").value;
+    data.intentgraph = getE("intentyes").checked;
+    data.save_chat = getE("saveChatYes").checked;
+    data.commands_enable = getE("commandYes").checked;
   } else if (provider === "houndify") {
     data.key = getE("houndKey").value;
     data.id = getE("houndID").value;
@@ -384,6 +410,20 @@ function updateKGAPI() {
         getE("togetherKey").value = data.key;
         getE("togetherModel").value = data.model;
         getE("togetherAIPrompt").value = data.openai_prompt;
+        getE("commandYes").checked = data.commands_enable
+        getE("intentyes").checked = data.intentgraph
+        getE("saveChatYes").checked = data.save_chat
+      } else if (data.provider === "openrouter") {
+        getE("openrouterKey").value = data.key;
+        getE("openrouterModel").value = data.model;
+        getE("openrouterAIPrompt").value = data.openai_prompt;
+        getE("commandYes").checked = data.commands_enable
+        getE("intentyes").checked = data.intentgraph
+        getE("saveChatYes").checked = data.save_chat
+      } else if (data.provider === "grok") {
+        getE("grokKey").value = data.key;
+        getE("grokModel").value = data.model;
+        getE("grokAIPrompt").value = data.openai_prompt;
         getE("commandYes").checked = data.commands_enable
         getE("intentyes").checked = data.intentgraph
         getE("saveChatYes").checked = data.save_chat
